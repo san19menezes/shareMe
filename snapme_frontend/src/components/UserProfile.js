@@ -116,9 +116,13 @@ const UserProfile = () => {
                             Saved
                         </button>
                     </div>
-                    {pins?.length && (
+                    {pins?.length ? (
                         <div className='px-2'>
                             <MasonryLayout pins={pins} />
+                        </div>
+                    ) : (
+                        <div className='flex justify-center font-bold items-center w-full text-1xl mt-2'>
+                            No pins found!
                         </div>
                     )}
 
