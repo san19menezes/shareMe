@@ -45,7 +45,6 @@ const PinDetail = ({ user }) => {
         if (query) {
             client.fetch(`${query}`).then((data) => {
                 setPinDetail(data[0]);
-                console.log(data);
                 //Use this to recommend similar category of pins
                 if (data[0]) {
                     const query1 = pinDetailMorePinQuery(data[0]);
