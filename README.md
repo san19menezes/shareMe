@@ -10,9 +10,6 @@ This is a full stack application built using React, Tailwind and Sanity
 ## Live Demo
 The application is deployed here - https://sharemesanchia.netlify.app/
 
-### Note
-The discover categories and search functionality is in progress. 
-
 
 
 
