@@ -75,7 +75,7 @@ const PinDetail = ({ user }) => {
                 />
             </div>
             <div className='w-full p-5 flex-1 xl:min-w-620'>
-                <div className='[flex items-center justify-between'>
+                <div className='flex items-center justify-between'>
                     <div className='flex gap-2 items-center'>
                         <a
                             href={`${pinDetail.image?.asset?.url}?dl=`}
@@ -151,13 +151,11 @@ const PinDetail = ({ user }) => {
                 </div>
             </div>
         </div>
-        {pins?.length > 0 ? (
+        {pins?.length > 0 && (
             <>
                 <h2 className='text-center font-bold text-2xl mt-8 mb-4'>More like this</h2>
                 <MasonryLayout pins={pins} />
             </>
-        ) : (
-            <Spinner message='Loading more pins..' />
         )}
     </>
     )
