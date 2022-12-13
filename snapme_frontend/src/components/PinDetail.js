@@ -1,3 +1,7 @@
+// This file is a reference to the pin detail page. You can arrive on this page by clicking on any one of the 
+// pins on the main feed i.e the landing page after login
+
+
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,6 +17,8 @@ const PinDetail = ({ user }) => {
     const [pinDetail, setPinDetail] = useState(null);
     const [comment, setComment] = useState('');
     const [addingComment, setAddingComment] = useState(false);
+    // Use params extracts the id from the URI and makes it accessible within the component. 
+    // This is helpful when we wish to have dynamic URLs containing the individual id for the details page
     const { pinId } = useParams();
 
     const addComment = () => {
@@ -45,7 +51,8 @@ const PinDetail = ({ user }) => {
         if (query) {
             client.fetch(`${query}`).then((data) => {
                 setPinDetail(data[0]);
-                //Use this to recommend similar category of pins
+                // Use this to recommend similar category of pins
+                // Based on the current category of the pin selected, we can recommend similar pins to the user
                 if (data[0]) {
                     const query1 = pinDetailMorePinQuery(data[0]);
                     client.fetch(query1).then((res) => {
@@ -55,12 +62,13 @@ const PinDetail = ({ user }) => {
             });
         }
     };
-
+    // We will need to re-render the page if a different pin is selected i.e. the pin Id changes
+    // Hence pinId is supplied as a dependency in the useEffect function for this use-case
     useEffect(() => {
         fetchPinDetails();
     }, [pinId])
 
-
+    // Showing a loading spinner makes the screen intuitive for the users until the data is fetched
     if (!pinDetail) return <Spinner message='Loading Pin...' />
 
     return (<>
@@ -112,6 +120,7 @@ const PinDetail = ({ user }) => {
                 </Link>
                 <h2 className='mt-5 text-2xl'>Comments</h2>
                 <div className='max-h-370 overflow-y-auto'>
+                    {/* Once the pin details are fetched, use array.map() to dynamically populate the list based on the array length */}
                     {pinDetail?.comments?.map((comment, i) => (
                         <div className='flex gap-2 mt-5 items-center bg-white rounded-lg' key={i}>
                             <img
